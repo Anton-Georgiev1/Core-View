@@ -1,5 +1,4 @@
 import customtkinter as ctk
-from utils.cpu_info import get_cpu_info
 
 class CPUTab(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
@@ -32,8 +31,6 @@ class CPUTab(ctk.CTkFrame):
         self.create_label_value("Usage", 6, 0)
         self.usage_val = self.create_label_value("", 6, 1)
 
-        self.update_info()
-
     def create_label_value(self, label_text, row, col):
         if label_text:
             lbl = ctk.CTkLabel(self, text=label_text, font=ctk.CTkFont(size=12, weight="bold"))
@@ -44,9 +41,10 @@ class CPUTab(ctk.CTkFrame):
             val.grid(row=row, column=col, padx=10, pady=5, sticky="e")
             return val
 
-    def update_info(self):
-        info = get_cpu_info()
-        
+    def update_data(self, info):
+        if not info:
+            return
+            
         self.brand_value.configure(text=info["brand_raw"])
         
         if self.arch_val:
@@ -59,6 +57,3 @@ class CPUTab(ctk.CTkFrame):
             self.clock_val.configure(text=f"{info['frequency_current']:.2f} MHz")
         if self.usage_val:
             self.usage_val.configure(text=f"{info['usage_percent']}%")
-            
-        # Schedule next update
-        self.after(1000, self.update_info)

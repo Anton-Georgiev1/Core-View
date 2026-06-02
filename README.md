@@ -42,8 +42,8 @@ Core View has been meticulously optimized for responsiveness:
     ```bash
     pip install -r requirements.txt
     ```
-    > [!NOTE]
-    > Requirements include `customtkinter`, `psutil`, `py-cpuinfo`, `pystray`, and `Pillow`
+> [!NOTE]
+> Requirements include `customtkinter`, `psutil`, `py-cpuinfo`, `pystray`, and `Pillow`
 
 3.  Run the application:
     ```bash

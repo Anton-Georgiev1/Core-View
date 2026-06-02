@@ -120,14 +120,12 @@ class CoreViewApp(ctk.CTk):
     def settings_callback(self, setting_type, value):
         if setting_type == "theme":
             ctk.set_appearance_mode(value)
-        elif setting_type == "tray_on_close":
-            self.minimize_to_tray = value
+        elif setting_type == "minimize_now":
+            self.withdraw()
 
     def on_closing(self):
-        if self.minimize_to_tray:
-            self.withdraw()
-        else:
-            self.quit_app()
+        # Exit the application when X is clicked
+        self.quit_app()
 
     def show_window(self):
         self.deiconify()

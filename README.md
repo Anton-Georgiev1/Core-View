@@ -1,63 +1,69 @@
-# Core View
+# 🖥️ Core View
 
-Core View is a modern, lightweight, and visually polished system information utility for Windows, inspired by the classic CPU-Z. Built with **CustomTkinter**, it provides a sleek, high-DPI responsive interface that feels at home on modern desktop environments.
+**A high-performance, real-time system monitoring tool for Windows.**
 
-Whether you're an enthusiast monitoring your overclock or a developer needing quick hardware specs, Core View delivers essential system data with a "set it and forget it" efficiency.
-
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=flat&logo=python&logoColor=white)
-![CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter-blue)
-![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=flat&logo=windows&logoColor=white)
+Core View is designed for power users and enthusiasts who need a fast, lightweight, and detailed overview of their system's performance and hardware health. Unlike heavy monitoring suites, Core View starts instantly and provides critical data with minimal system impact.
 
 ---
 
-## Key Features
+## ✨ Key Features
 
-- **Real-time CPU Monitoring:** Live tracking of clock speeds and processor usage.
-- **Deep Hardware Discovery:** Detailed metadata for your Processor, Motherboard, BIOS, RAM, and GPU.
-- **Modern UI/UX:**
-  - **Dark & Light Themes:** Toggle between modes to suit your workspace.
-  - **Fixed Precision Layout:** A non-resizable, focused window that prevents clutter.
-  - **System Tray Integration:** Minimize the app to the tray to keep your taskbar clean while it runs in the background.
-- **Efficient Data Gathering:** Uses a blend of `psutil`, `py-cpuinfo`, and native Windows PowerShell (CIM) queries for accurate hardware reporting without the bloat.
+*   **⚡ Instant Startup:** Leverages multi-threaded asynchronous loading to display critical hardware info the moment you launch it.
+*   **📊 Comprehensive Monitoring:**
+    *   **CPU:** Detailed brand, architecture, core/thread counts, and real-time usage (Good/Moderate/High Load status).
+    *   **Graphics:** Real-time GPU utilization and hardware name.
+    *   **Memory RAM:** Total size and physical slot usage (know exactly how many sticks you have installed).
+    *   **Storage:** Track capacity and usage percentage of your primary drive.
+    *   **Fans & Sensors:** Real-time monitoring of fan speeds (RPM) and system temperatures (Cool/Warm/Hot status).
+*   **📂 Intuitive Tabbed Interface:** Clean, organized categories for CPU, Mainboard, Memory, Graphics, and Fans.
+*   **🌙 Modern UI:** Built with a beautiful dark-mode interface using `CustomTkinter`.
+*   **📥 System Tray Integration:** Minimize to the system tray for unobtrusive background monitoring.
 
-## Preview
+---
 
-*The application features a tabbed interface:*
-1. **CPU:** Architecture, Cores, Threads, and live Frequency.
-2. **Mainboard:** Manufacturer, Model, and BIOS version/date.
-3. **Memory:** Total physical RAM capacity.
-4. **Graphics:** Integrated and Dedicated GPU identification.
-5. **Settings:** Toggle themes and background behavior.
+## 🛠️ Performance Optimization (Technical Deep Dive)
 
-## Getting Started
+Core View has been meticulously optimized for responsiveness:
+*   **Asynchronous Architecture:** Slow system calls (like PowerShell and WMI) are offloaded to dedicated background threads, ensuring the UI remains buttery smooth at 60+ FPS.
+*   **Smart Caching:** Static hardware details are cached after the first retrieval, reducing unnecessary CPU overhead.
+*   **Consolidated Fetching:** Multiple hardware sensor queries are combined into single, efficient system calls to minimize process-spawn latency.
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- **Windows OS** (Required for hardware discovery modules)
-- **Python 3.12 or higher**
+*   Windows 10 or 11
+*   Python 3.12+
 
 ### Installation
+1.  Clone the repository:
+2.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *(Note: Requirements include `customtkinter`, `psutil`, `py-cpuinfo`, `pystray`, and `Pillow`)*
 
-1. **Clone the repository:**
-2. **Install dependencies:**
-   ```bash
-   pip install customtkinter psutil py-cpuinfo pystray pillow
-   ```
+3.  Run the application:
+    ```bash
+    python core_view.py
+    ```
 
-3. **Run the application:**
-   ```bash
-   python core_view.py
-   ```
+---
 
-## Built With
+## 🧪 Testing
 
-- [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) - Modern UI components for Tkinter.
-- [psutil](https://github.com/giampaolo/psutil) - Cross-platform lib for process and system monitoring.
-- [py-cpuinfo](https://github.com/workhorse/py-cpuinfo) - Detailed CPU info gathering.
-- [Pystray](https://github.com/moses-palmer/pystray) - System tray icon support.
+Core View includes a robust test suite to ensure reliability across different Windows configurations. To run the tests:
+```bash
+$env:PYTHONPATH='.'
+pytest tests/
+```
 
-## License
+---
 
-This project is open-source and available under the [MIT License](LICENSE).
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 

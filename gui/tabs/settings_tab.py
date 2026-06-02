@@ -22,12 +22,11 @@ class SettingsTab(ctk.CTkFrame):
         self.tray_label = ctk.CTkLabel(self, text="Behavior", font=ctk.CTkFont(size=14, weight="bold"))
         self.tray_label.grid(row=3, column=0, padx=20, pady=(20, 10), sticky="w")
         
-        self.tray_var = ctk.BooleanVar(value=True)
-        self.tray_checkbox = ctk.CTkCheckBox(self, text="Minimize to Tray on Close", variable=self.tray_var, command=self.update_tray_opt)
-        self.tray_checkbox.grid(row=4, column=0, padx=30, pady=5, sticky="w")
+        self.tray_button = ctk.CTkButton(self, text="Minimize to System Tray", command=self.minimize_to_tray_action)
+        self.tray_button.grid(row=4, column=0, padx=30, pady=10, sticky="w")
 
     def update_theme(self):
         self.app_callback("theme", self.theme_var.get())
 
-    def update_tray_opt(self):
-        self.app_callback("tray_on_close", self.tray_var.get())
+    def minimize_to_tray_action(self):
+        self.app_callback("minimize_now", True)

@@ -20,6 +20,11 @@ class FansTab(ctk.CTkFrame):
         self.no_data_lbl = ctk.CTkLabel(self.sensors_frame, text="Loading sensors...")
         self.no_data_lbl.grid(row=0, column=0, columnspan=2, pady=20)
 
+    def get_temp_status(self, temp):
+        if temp < 45: return "(Cool)"
+        if temp < 75: return "(Warm)"
+        return "(Hot)"
+
     def update_data_dynamic(self, info):
         fans = info.get("fans", [])
         
@@ -34,13 +39,17 @@ class FansTab(ctk.CTkFrame):
             reading = fan["reading"]
             unit = fan["unit"]
             
+            status = ""
+            if "Temperature" in name:
+                status = f" {self.get_temp_status(reading)}"
+            
             if name not in self.sensor_widgets:
                 lbl = ctk.CTkLabel(self.sensors_frame, text=name, font=ctk.CTkFont(size=12, weight="bold"))
                 lbl.grid(row=i, column=0, padx=20, pady=2, sticky="w")
                 
-                val = ctk.CTkLabel(self.sensors_frame, text=f"{reading} {unit}")
+                val = ctk.CTkLabel(self.sensors_frame, text=f"{reading} {unit}{status}")
                 val.grid(row=i, column=1, padx=20, pady=2, sticky="e")
                 
                 self.sensor_widgets[name] = val
             else:
-                self.sensor_widgets[name].configure(text=f"{reading} {unit}")
+                self.sensor_widgets[name].configure(text=f"{reading} {unit}{status}")

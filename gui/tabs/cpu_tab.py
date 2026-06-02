@@ -41,6 +41,11 @@ class CPUTab(ctk.CTkFrame):
             val.grid(row=row, column=col, padx=10, pady=5, sticky="e")
             return val
 
+    def get_status(self, percent):
+        if percent < 50: return "(Good)"
+        if percent < 85: return "(Moderate)"
+        return "(High Load)"
+
     def update_data(self, info):
         if not info:
             return
@@ -56,4 +61,5 @@ class CPUTab(ctk.CTkFrame):
         if self.clock_val:
             self.clock_val.configure(text=f"{info['frequency_current']:.2f} MHz")
         if self.usage_val:
-            self.usage_val.configure(text=f"{info['usage_percent']}%")
+            usage = info['usage_percent']
+            self.usage_val.configure(text=f"{usage}% {self.get_status(usage)}")

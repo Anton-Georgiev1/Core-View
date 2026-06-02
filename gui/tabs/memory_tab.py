@@ -29,6 +29,11 @@ class MemoryTab(ctk.CTkFrame):
         val.grid(row=row, column=1, padx=20, pady=2, sticky="e")
         return val
 
+    def get_status(self, percent):
+        if percent < 50: return "(Good)"
+        if percent < 85: return "(Moderate)"
+        return "(High Load)"
+
     def update_data(self, info):
         self.mem_size_val.configure(text=f"{info['total_ram']} GB")
         self.ram_slots_val.configure(text=f"{info['ram_slots_filled']} / {info['ram_slots_total']} slots")
@@ -36,4 +41,6 @@ class MemoryTab(ctk.CTkFrame):
         self.disk_total_val.configure(text=f"{info['disk_total']} GB")
         self.disk_used_val.configure(text=f"{info['disk_used']} GB")
         self.disk_free_val.configure(text=f"{info['disk_free']} GB")
-        self.disk_usage_val.configure(text=f"{info['disk_percent']}%")
+        
+        usage = info['disk_percent']
+        self.disk_usage_val.configure(text=f"{usage}% {self.get_status(usage)}")

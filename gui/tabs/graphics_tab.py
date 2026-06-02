@@ -23,6 +23,12 @@ class GraphicsTab(ctk.CTkFrame):
     def update_data(self, info):
         self.gpu_name_val.configure(text=info["gpu_name"])
 
+    def get_status(self, percent):
+        if percent < 50: return "(Good)"
+        if percent < 85: return "(Moderate)"
+        return "(High Load)"
+
     def update_data_dynamic(self, info):
         # Update GPU usage from dynamic data
-        self.gpu_usage_val.configure(text=f"{info['gpu_usage']}%")
+        usage = info['gpu_usage']
+        self.gpu_usage_val.configure(text=f"{usage}% {self.get_status(usage)}")
